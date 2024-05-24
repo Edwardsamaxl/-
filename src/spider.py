@@ -12,7 +12,7 @@ parent_dir = os.path.dirname(current_dir)
 data_dir = os.path.join(parent_dir, 'data')
 
 # 生成csv文件的路径
-csv_file_path = os.path.join(data_dir, 'jingdong.csv')
+csv_file_path = os.path.join(data_dir, '奥林巴斯e-m10.csv')
 
 with open(csv_file_path, mode='w', newline='', encoding='utf-8') as f:
     csv.writer(f).writerow(['title', 'price', 'shop', 'detail_url'])
@@ -23,37 +23,38 @@ headers = {
     'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0'
 }
 s = 1
-for page in range(1, 10): #1-10页
+for page in range(1, 20): #1-20页
     t = int(time.time() * 1000)
-    body = '{"keyword":"iPhone","qrst":"1","wq":"iPhone","ev":"exbrand_Apple^","pvid":"c2a8f09dbfa044a6a12f860e20edb6c7","isList":0,"page":"' + str(
-        page) + '","s":"' + str(s) + '","click":"0","log_id":"1697547020245.6899","show_items":""}'
-    if page == 2:
-        s = 26
-        body = '{"keyword":"iPhone","qrst":"1","wq":"iPhone","ev":"exbrand_Apple^","pvid":"c2a8f09dbfa044a6a12f860e20edb6c7","isList":0,"page":"' + str(
-            page) + '","s":"' + str(s) + '","click":"0","log_id":"1697547020245.6899","show_items":""}'
-    elif page > 2:
-        s += 30
-        if page % 2 == 0:
-            body = '{"keyword":"iPhone","qrst":"1","wq":"iPhone","ev":"exbrand_Apple^","pvid":"c2a8f09dbfa044a6a12f860e20edb6c7","page":"' + str(
-                page) + '","s":"' + str(
-                s) + '","scrolling":"y","log_id":"1697545127114.3155","tpl":"3_M","isList":0,"show_items":""}'
-        else:
-            body = '{"keyword":"iPhone","qrst":"1","wq":"iPhone","ev":"exbrand_Apple^","pvid":"c2a8f09dbfa044a6a12f860e20edb6c7","isList":0,"page":"' + str(
-                page) + '","s":"' + str(s) + '","click":"0","log_id":"1697544397338.9790","show_items":""}'
+    if page % 2 == 1:
+        body = '{"keyword":"奥林巴斯e-m10","suggest":"3.def.0.~SAK8|MIXTAG_SAK8R,BUNCH_A_SAK8_R,SAK8_M_AM_L34160,SAK8_M_GUD_R,SAK8_S_AM_R,SAK8_D_HSP_R,SAK8_O_QJCON_L47824,SAK8_SC_PD_R,SAK8_SM_PB_R,SAK8_SM_PRK_R,SAK8_SM_PRC_R,SAK8_SM_PRR_R,SAK8_SS_PM_R|"' \
+               ',"wq":"奥林巴斯e-m10","pvid":"d8f4d2565ffd46f082daf231963f0e0d","isList":0,"page":"' + str(
+        page) + '","s":"' + str(s) + '",,"click":"0","show_items":""}'
+    else:
+        body = '{"keyword":"奥林巴斯e-m10","suggest":"3.def.0.~SAK8|MIXTAG_SAK8R,BUNCH_A_SAK8_R,SAK8_M_AM_L34160,SAK8_M_GUD_R,SAK8_S_AM_R,SAK8_D_HSP_R,SAK8_O_QJCON_L47824,SAK8_SC_PD_R,SAK8_SM_PB_R,SAK8_SM_PRK_R,SAK8_SM_PRC_R,SAK8_SM_PRR_R,SAK8_SS_PM_R|","wq":"奥林巴斯e-m10","pvid":"d8f4d2565ffd46f082daf231963f0e0d","page":"' + str(
+        page) + '","s":"' + str(s) + '","scrolling":"y","tpl":"1_M","isList":0,"show_items":""}'
+    if page==1:
+        s=27
+    if page==2:
+        s=59
+    if page==3:
+        s=91
+    if page>3:
+        s+=30
     params = {
         'appid': 'search-pc-java',
-        'functionId': 'pc_search_s_new',
+        'functionId': 'pc_search_adv_Search', # 改
         'client': 'pc',
         'clientVersion': '1.0.0',
         't': str(t),
         'body': body,
         'loginType': '3',
-        'uuid': '122270672.1675327822068798256204.1675327822.1696749738.1697544369.7',
-        'area': '18_1482_48942_49058',
-        'h5st': '20231017205657848;g5giig9tnm63gij2;f06cc;tk03wbde31c7218nmTOuI4vmUG1gibUwyDKLNpF6B_t1uk9ukpSq3k_k19h74PyUWE_Fz9mV-ggz4JCtsVbQZVSId9dC;825dbf6bd60713fa1ddad5e95d169108;4.1;1697547417848;ee3cf7f6b94dc20e9265d83066bb9ceece4bb89e2b7e8bf5afb1bfd928788174bfa06c210ddd4437d8a2e234330c3a3980b96c3953b1ab788029ae792b39e113ccac142f09e3a1fa8c3f25055353b835ed0bf65228424626b8a9e1d2c030999d9be97a9dee9fb20116ceb0deb8736546109bc1cf5b91d1dfa2b39c79b3b0f0a5a036cdc921a1f147179b291c830dc87a6d3d0c3885fe721d5f0391a55bb4bf663963282084e04c7f24e6d3bcb219f4cb08a33c86f2c515c368479ab2fffd0f4935b373832965c1ba9aa292710f7023e99dac2e1bde15cd796fe1601c5425e954a8cebb66dc24031fb337c7d79d2a6f46c875d77cbc102770fd5125f99aaa366d5abac9c006c2f0275731844dd1353f808489e029e35b485616771b972ae3bb95',
-        'x-api-eid-token': 'jdd03BFXLLB72GO2GWA4OW3JSYXJPOVRF3WAKAKETOTSMNISZ6VIJTLEVQKEHWUA6VLD7ORS2QYC55PWBVUZVPZTXPDCHZUAAAAMLHWDXLUYAAAAACL4BJCT4CQASEEX',
+        'uuid': '143920055.17162820800941433364055.1716282080.1716282080.1716296067.2', # 改
+        # 'area': '18_1482_48942_49058',
+        # 'h5st': '20231017205657848;g5giig9tnm63gij2;f06cc;tk03wbde31c7218nmTOuI4vmUG1gibUwyDKLNpF6B_t1uk9ukpSq3k_k19h74PyUWE_Fz9mV-ggz4JCtsVbQZVSId9dC;825dbf6bd60713fa1ddad5e95d169108;4.1;1697547417848;ee3cf7f6b94dc20e9265d83066bb9ceece4bb89e2b7e8bf5afb1bfd928788174bfa06c210ddd4437d8a2e234330c3a3980b96c3953b1ab788029ae792b39e113ccac142f09e3a1fa8c3f25055353b835ed0bf65228424626b8a9e1d2c030999d9be97a9dee9fb20116ceb0deb8736546109bc1cf5b91d1dfa2b39c79b3b0f0a5a036cdc921a1f147179b291c830dc87a6d3d0c3885fe721d5f0391a55bb4bf663963282084e04c7f24e6d3bcb219f4cb08a33c86f2c515c368479ab2fffd0f4935b373832965c1ba9aa292710f7023e99dac2e1bde15cd796fe1601c5425e954a8cebb66dc24031fb337c7d79d2a6f46c875d77cbc102770fd5125f99aaa366d5abac9c006c2f0275731844dd1353f808489e029e35b485616771b972ae3bb95',
+        'x-api-eid-token': 'jdd03VXVUCOQYAYIGUFWIR72YCBVI4KG4Y5HDHHBRJJ6E42WS7GMQVOGFR4EBDMCH374VGGSAGGSC7LVITDVLZ2BQHXFWE4AAAAMPTNKRLYQAAAAACHKFPDJMA2Y7ZMX',
     }
-    url = "https://search.jd.com/Search?keyword=%E5%A5%A5%E6%9E%97%E5%B7%B4%E6%96%AF&enc=utf-8&pvid=d031f86761dd45f4a8a9891961bfa40e&czLogin=1"
+    # 改
+    url = "https://search.jd.com/Search?keyword=%E5%A5%A5%E6%9E%97%E5%B7%B4%E6%96%AFe-m10&enc=utf-8&suggest=3.def.0.~SAK8|MIXTAG_SAK8R,BUNCH_A_SAK8_R,SAK8_M_AM_L34160,SAK8_M_GUD_R,SAK8_S_AM_R,SAK8_D_HSP_R,SAK8_O_QJCON_L47824,SAK8_SC_PD_R,SAK8_SM_PB_R,SAK8_SM_PRK_R,SAK8_SM_PRC_R,SAK8_SM_PRR_R,SAK8_SS_PM_R|&wq=%E5%A5%A5%E6%9E%97%E5%B7%B4%E6%96%AF&pvid=d8f4d2565ffd46f082daf231963f0e0d"
     # 1. 发送请求 (访问网站)
     response = requests.get(url=url, params=params, headers=headers)
     # 2. 提取数据 将需要的内容提取出来
@@ -66,8 +67,11 @@ for page in range(1, 10): #1-10页
         title = li.xpath('string(.//div[@class="p-name p-name-type-2"])').get("").strip()
         price = li.xpath('string(.//div[@class="p-price"])').get("").strip()
         shop = li.xpath('string(.//div[@class="p-shop"])').get("").strip()
+        # commit = li.xpath('string(.//div[@class="p-commit"])').get("").strip()
         detail_url = "https:" + li.xpath('.//div[@class="p-name p-name-type-2"]/a/@href').get("")
         print(title, price, shop, detail_url)
+        # print(price,commit)
         # 3. 保存数据
         with open(csv_file_path, mode='a', newline='', encoding='utf-8') as f:
             csv.writer(f).writerow([title, price, shop, detail_url])
+            # csv.writer(f).writerow([price,commit])
