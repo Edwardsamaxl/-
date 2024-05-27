@@ -23,7 +23,7 @@ if not os.path.exists(data_dir):
     os.makedirs(data_dir)
 
 # 生成csv文件的路径
-csv_file_path = os.path.join(data_dir, '索尼a7m4.csv')
+csv_file_path = os.path.join(data_dir, '钢笔.csv')
 
 # 创建文件对象
 f = open(csv_file_path, mode='w', encoding='utf-8', newline='')
@@ -48,12 +48,12 @@ driver.get('https://www.taobao.com/')
 driver.listen.start('h5/mtop.relationrecommend')
 
 # 输入商品关键字
-driver.ele('css:#q').input('索尼a7m4')
+driver.ele('css:#q').input('钢笔')
 
 # 进行点击搜索
 driver.ele('css:.btn-search').click()
 
-for page in range(5):
+for page in range(10):
     print(f'正在采集第{page + 1}页的数据内容')
     # 设置延时
     time.sleep(2)
