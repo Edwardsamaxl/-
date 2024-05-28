@@ -23,7 +23,7 @@ if not os.path.exists(data_dir):
     os.makedirs(data_dir)
 
 # 生成csv文件的路径
-csv_file_path = os.path.join(data_dir, '钢笔.csv')
+csv_file_path = os.path.join(data_dir, '闹钟.csv')
 
 # 创建文件对象
 f = open(csv_file_path, mode='w', encoding='utf-8', newline='')
@@ -48,7 +48,7 @@ driver.get('https://www.taobao.com/')
 driver.listen.start('h5/mtop.relationrecommend')
 
 # 输入商品关键字
-driver.ele('css:#q').input('钢笔')
+driver.ele('css:#q').input('闹钟')
 
 # 进行点击搜索
 driver.ele('css:.btn-search').click()
