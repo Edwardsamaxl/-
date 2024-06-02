@@ -19,7 +19,6 @@ def clean_data(name):
     # 计算平均价格作为期望价格
     expected_price = data['价格'].mean()
 
-    # 处理异常值（数据价格应该在期望价格的50%-150%范围内）
     data = data[(expected_price * 0.15 < data['价格']) & (data['价格'] < expected_price * 2.0)]
 
     # 将筛选后的数据存储到新的CSV文件中

@@ -4,6 +4,7 @@ from my_package import my_csv
 import re
 import matplotlib.pyplot as plt
 
+
 plt.rcParams['font.sans-serif'] = ['SimSun']  # 设置全局中文字体为宋体
 plt.rcParams['axes.unicode_minus'] = False  # 解决负号显示问题
 
@@ -36,23 +37,34 @@ def is_in_tuple(tuple0, num0):
 
 
 def get_section(nums):
+    # nums = [3, 4, 7, 8]
     section_tuples = []
     min_num = min(nums)
     max_num = max(nums)
-    section_length = (max_num - min_num) / 10
-
-    left = min_num
-    for _ in range(10):
-        right = left + section_length
-        section_tuples.append((left, right))
-        left = right
-
+    sum_length = max_num - min_num
+    section_length = int(sum_length / 10)
+    if section_length < 10:
+        section_length = 10
+    else:
+        temp = int(section_length / 10)
+        section_length = (temp + 1) * 10
+    temp = int(min_num / 10) * 10
+    left = temp + 1
+    right = temp + section_length
+    while right < max_num:
+        section_tuple = (left, right)
+        section_tuples.append(section_tuple)
+        temp = right
+        left = temp + 1
+        right = temp + section_length
     return section_tuples
 
 
 def get_dict(datas):
     lists = []
+
     my_dict = {}
+    # datas = my_csv.read_to_csv(filename)
     del datas[0]
 
     for data in datas:
@@ -81,6 +93,7 @@ def get_dict(datas):
 
 
 def show_bing_plot(data, label, product_name):
+    # 绘制饼图
     plt.figure(figsize=(8, 5))
     plt.pie(data, labels=label, autopct='%1.1f%%', startangle=140)
     plt.title('{}不同价格区间的平均销售量占比'.format(product_name))
@@ -88,31 +101,24 @@ def show_bing_plot(data, label, product_name):
     plt.show()
 
 
+
 if __name__ == '__main__':
     name_dict = {
-        "cleaning钢笔": (1, 10000),
-        "cleaning索尼": (1, 10000),
-        "iPhone14": (1, 100),
-        "奥林巴斯": (500, 1500),
-        "充电宝": (1, 800),
-        "防晒霜": (1, 400),
-        "钢笔": (1, 1000),
-        "护手霜": (10, 170),
-        "闹钟": (1, 1000),
-        "尼康d810": (1, 200),
-        "索尼a7m4": (1000, 10000)
+        "索尼a7m4": (1, 20000),
+        "钢笔": (1, 10000),
+        "cleaning_钢笔": (1, 10000),
+        "cleaning_索尼a7m4_": (1, 20000),
+        # "cleaning_iPhone14_": (1, 10000),
+        "cleaning_小米充电宝_10000": (1, 10000),
+        "cleaning_三只松鼠每日坚果_750g": (1, 10000),
+        # "cleaning_塑料袋_": (1, 10000),
+        "cleaning_iPhone14_壳": (1, 10000)
     }
     for name, limit in name_dict.items():
         clean_data = []
         filename = os.path.join(os.path.dirname(__file__), '..', 'data', f'{name}.csv')
-        print(f"Attempting to read file: {filename}")  # 调试信息
 
-        try:
-            my_data = my_csv.read_to_csv(filename)
-        except FileNotFoundError:
-            print(f"File not found: {filename}")
-            continue
-
+        my_data = my_csv.read_to_csv(filename)
         del my_data[0]
         for data in my_data:
             if is_in_tuple(limit, float(data[1])):

@@ -103,17 +103,15 @@ def show_bar_plot(data, label, product_name):
 
 if __name__ == '__main__':
     name_dict = {
+        "索尼a7m4": (1, 20000),
+        "钢笔": (1, 10000),
         "cleaning_钢笔": (1, 10000),
-        "cleaning索尼": (1, 10000),
-        "iPhone14": (1, 100),
-        "奥林巴斯": (500, 1500),
-        "充电宝": (1, 800),
-        "防晒霜": (1, 400),
-        "钢笔": (1, 1000),
-        "护手霜": (10, 170),
-        "闹钟": (1, 1000),
-        "尼康d810": (1, 200),
-        "索尼a7m4": (1000, 10000)
+        "cleaning_索尼a7m4_": (1, 20000),
+        # "cleaning_iPhone14_": (1, 10000),
+        "cleaning_小米充电宝_10000": (1, 10000),
+        "cleaning_三只松鼠每日坚果_750g": (1, 10000),
+        # "cleaning_塑料袋_": (1, 10000),
+        "cleaning_iPhone14_壳": (1, 10000)
     }
 
     for name, limit in name_dict.items():
